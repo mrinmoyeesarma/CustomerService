@@ -11,4 +11,6 @@ public interface CustomerService {
 	Subscription getAvailablePlansById(long id);
 
 	Subscription updateSubscriptionStatus(long id, String status);
+	
+	Subscription createRecharge(long planid,String username);
 }

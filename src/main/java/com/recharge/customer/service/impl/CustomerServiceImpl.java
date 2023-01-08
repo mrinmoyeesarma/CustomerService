@@ -1,5 +1,6 @@
 package com.recharge.customer.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,8 +33,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Subscription updateSubscriptionStatus( long id, String status) {
-		Subscription sub = subscriptionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Subscription", "id", id));
+	public Subscription updateSubscriptionStatus(long id, String status) {
+		Subscription sub = subscriptionRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Subscription", "id", id));
 		sub.setRechargeStatus(status);
 		Subscription updatedSubscription = subscriptionRepository.save(sub);
 		return updatedSubscription;
@@ -42,8 +44,24 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Subscription getAvailablePlansById(long id) {
-		Subscription sub = subscriptionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Subscription","id",id));
+		Subscription sub = subscriptionRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Subscription", "id", id));
 		return sub;
+	}
+
+	@Override
+	public Subscription createRecharge(long planid, String username) {
+		RechargePlan recharge = rechargePlanRepository.findById(planid)
+				.orElseThrow(() -> new ResourceNotFoundException("RechargePlan", "id", planid));
+
+		Subscription sub = new Subscription();
+		sub.setPlanid(recharge.getPlan_id());
+		sub.setRechargeStatus("Active");
+		sub.setSubscriptiondate(new Date());
+		sub.setUsername(username);
+		sub.setValidity(recharge.getValidity());
+		Subscription createdsub = subscriptionRepository.save(sub);
+		return createdsub;
 	}
 
 }

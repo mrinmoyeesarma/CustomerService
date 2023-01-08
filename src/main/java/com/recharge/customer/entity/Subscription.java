@@ -25,7 +25,7 @@ public class Subscription {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long recharge_id;
 	@Column(name = "planid", nullable = false)
-	private int planid;
+	private long planid;
 	@Column(name = "username", nullable = false)
 	private String username;
 	@Column(name = "subscriptiondate", nullable = false)
@@ -43,11 +43,11 @@ public class Subscription {
 		this.recharge_id = recharge_id;
 	}
 
-	public int getPlanid() {
+	public long getPlanid() {
 		return planid;
 	}
 
-	public void setPlanid(int planid) {
+	public void setPlanid(long planid) {
 		this.planid = planid;
 	}
 

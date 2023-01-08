@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,4 +47,13 @@ public class CustomerController {
 		Subscription sub = customerService.updateSubscriptionStatus(id, status);
 		return new ResponseEntity<>(sub, HttpStatus.OK);
 	}
+
+	// Perform recharge succesfully by using plan id and customer id
+	@PostMapping("/recharge/{planId}/{username}")
+	public ResponseEntity<Subscription> createRecharge(@PathVariable(name = "planId") int planId,
+			@PathVariable(name = "username") String username) {
+		Subscription sub = customerService.createRecharge(planId, username);
+		return new ResponseEntity<>(sub, HttpStatus.OK);
+	}
+
 }
