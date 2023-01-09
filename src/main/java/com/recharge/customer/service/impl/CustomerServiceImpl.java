@@ -53,13 +53,13 @@ public class CustomerServiceImpl implements CustomerService {
 	public Subscription createRecharge(long planid, String username) {
 		RechargePlan recharge = rechargePlanRepository.findById(planid)
 				.orElseThrow(() -> new ResourceNotFoundException("RechargePlan", "id", planid));
-
 		Subscription sub = new Subscription();
 		sub.setPlanid(recharge.getPlan_id());
 		sub.setRechargeStatus("Active");
 		sub.setSubscriptiondate(new Date());
 		sub.setUsername(username);
 		sub.setValidity(recharge.getValidity());
+		sub.setNetworkProvider(recharge.getNetworkProvider());
 		Subscription createdsub = subscriptionRepository.save(sub);
 		return createdsub;
 	}

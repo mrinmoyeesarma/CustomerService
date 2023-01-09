@@ -1,4 +1,4 @@
-package com.recharge.customer.Controller;
+package com.recharge.customer.controller;
 
 import java.util.List;
 
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +34,7 @@ public class CustomerController {
 
 	// get all plans by id
 	@GetMapping("/{id}")
-	public ResponseEntity<Subscription> getReachargeById(@PathVariable(name = "id") long id) {
+	public ResponseEntity<Subscription> getRechargeById(@PathVariable(name = "id") long id) {
 		return new ResponseEntity<>(customerService.getAvailablePlansById(id), HttpStatus.OK);
 
 	}
@@ -48,7 +47,7 @@ public class CustomerController {
 		return new ResponseEntity<>(sub, HttpStatus.OK);
 	}
 
-	// Perform recharge succesfully by using plan id and customer id
+	// Perform recharge successfully by using plan id and customer id
 	@PostMapping("/recharge/{planId}/{username}")
 	public ResponseEntity<Subscription> createRecharge(@PathVariable(name = "planId") int planId,
 			@PathVariable(name = "username") String username) {
