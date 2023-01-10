@@ -4,9 +4,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.recharge.customer.exception.ResourceNotFoundException;
+import com.recharge.customer.feignClient.AdminClient;
 import com.recharge.customer.entity.RechargePlan;
 import com.recharge.customer.entity.Subscription;
 import com.recharge.customer.repository.RechargePlanRepository;
@@ -15,14 +17,19 @@ import com.recharge.customer.service.CustomerService;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
+	@Autowired
 	private RechargePlanRepository rechargePlanRepository;
+	@Autowired
 	private SubscriptionRepository subscriptionRepository;
 
-	public CustomerServiceImpl(RechargePlanRepository rechargePlanRepository,
-			SubscriptionRepository subscriptionRepository) {
-		this.rechargePlanRepository = rechargePlanRepository;
-		this.subscriptionRepository = subscriptionRepository;
-	}
+	@Autowired
+	AdminClient client;
+
+//	public CustomerServiceImpl(RechargePlanRepository rechargePlanRepository,
+//			SubscriptionRepository subscriptionRepository) {
+//		this.rechargePlanRepository = rechargePlanRepository;
+//		this.subscriptionRepository = subscriptionRepository;
+//	}
 
 	@Override
 	public List<RechargePlan> getAvailablePlans() {
@@ -49,6 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
 		return sub;
 	}
 
+	// Perform Recharge Succesfully
 	@Override
 	public Subscription createRecharge(long planid, String username) {
 		RechargePlan recharge = rechargePlanRepository.findById(planid)
@@ -64,4 +72,18 @@ public class CustomerServiceImpl implements CustomerService {
 		return createdsub;
 	}
 
+// ReachrgePlan get from admin table of planid and save it in customer.
+	public void gplans(int planid, String userName) {
+		RechargePlan recharge = (client.getAllPlans().getBody().stream().filter((n) -> n.getPlan_id() == planid)
+				.findAny().get());
+
+		Subscription sub = new Subscription();
+		sub.setPlanid(planid);
+		sub.setRechargeStatus("Active");
+		sub.setSubscriptiondate(new Date());
+		sub.setUsername(userName);
+		sub.setValidity(planid);
+		sub.setNetworkProvider(userName);
+		Subscription createdsub = subscriptionRepository.save(sub);
+	}
 }

@@ -45,6 +45,12 @@ public class RechargePlan {
 		return networkProvider;
 	}
 
+	@Override
+	public String toString() {
+		return "RechargePlan [plan_id=" + plan_id + ", networkProvider=" + networkProvider + ", amount=" + amount
+				+ ", planName=" + planName + ", validity=" + validity + ", isAvailable=" + isAvailable + "]";
+	}
+
 	public void setNetworkProvider(String networkProvider) {
 		this.networkProvider = networkProvider;
 	}

@@ -2,6 +2,7 @@ package com.recharge.customer.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,15 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.recharge.customer.entity.RechargePlan;
 import com.recharge.customer.entity.Subscription;
 import com.recharge.customer.service.CustomerService;
+import com.recharge.customer.service.impl.CustomerServiceImpl;
 
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerController {
-	private CustomerService customerService;
+	@Autowired
+	private CustomerServiceImpl customerService;
 
-	public CustomerController(CustomerService customerService) {
-		this.customerService = customerService;
-	}
+	
+	
+//	public CustomerController(CustomerService customerService) {
+//		this.customerService = customerService;
+//	}
 
 	// get all the plans
 	@GetMapping("/availablePlans")
@@ -32,14 +37,15 @@ public class CustomerController {
 
 	}
 
-	// get all plans by id
+	// View the recharge made using rechargeId display detailed plan information along with
+	//recharge status
 	@GetMapping("/{id}")
 	public ResponseEntity<Subscription> getRechargeById(@PathVariable(name = "id") long id) {
 		return new ResponseEntity<>(customerService.getAvailablePlansById(id), HttpStatus.OK);
 
 	}
 
-	// cancel i.e update the id
+	// cancel recharge using recharge id  i.e update the id
 	@PutMapping("/{id}/{status}")
 	public ResponseEntity<Subscription> updatePost(@PathVariable(name = "id") long id,
 			@PathVariable(name = "status") String status) {
@@ -55,4 +61,12 @@ public class CustomerController {
 		return new ResponseEntity<>(sub, HttpStatus.OK);
 	}
 
+	@GetMapping("/plans")
+	public void getPlanS() {
+		customerService.gplans(1,"Sita");
+		customerService.gplans(4, "Karnish");
+	}
+	
+	
+	
 }
