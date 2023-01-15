@@ -60,16 +60,5 @@ public class CustomerServiceImpl implements CustomerService {
         return createdsub;
     }
 
-    // RechargePlan get from admin table of planId and save it in customer.
-    public void gplans(int planid, String userName) {
-        RechargePlan recharge = (client.getAllPlans().getBody().stream().filter((n) -> n.getPlan_id() == planid).findAny().get());
-        Subscription sub = new Subscription();
-        sub.setPlanid(planid);
-        sub.setRechargeStatus("Active");
-        sub.setSubscriptiondate(new Date());
-        sub.setUsername(userName);
-        sub.setValidity(planid);
-        sub.setNetworkProvider(userName);
-        subscriptionRepository.save(sub);
-    }
+   
 }

@@ -86,7 +86,7 @@ public class CustomerServiceImplTest {
         // Testing
         List<RechargePlan> plans = customerService.getAvailablePlans();
 
-        // Assertions
+        // Assertions checking 
         assertEquals(1, plans.size());
     }
 
