@@ -1,18 +1,5 @@
 package com.recharge.customer.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.recharge.customer.entity.RechargePlan;
 import com.recharge.customer.entity.Subscription;
 import com.recharge.customer.feignClient.AdminClient;
@@ -20,6 +7,12 @@ import com.recharge.customer.feignClient.LoginClient;
 import com.recharge.customer.payload.LoginDto;
 import com.recharge.customer.payload.UserDto;
 import com.recharge.customer.service.impl.CustomerServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/customer")

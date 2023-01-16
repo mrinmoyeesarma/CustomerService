@@ -1,14 +1,13 @@
 package com.recharge.customer.feignClient;
 
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.recharge.customer.entity.User;
 import com.recharge.customer.payload.LoginDto;
 import com.recharge.customer.payload.LoginResponseDto;
 import com.recharge.customer.payload.UserDto;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "LoginService", url = "http://localhost:8100")
 public interface LoginClient {

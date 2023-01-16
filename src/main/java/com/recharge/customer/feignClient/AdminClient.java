@@ -1,11 +1,11 @@
 package com.recharge.customer.feignClient;
-import java.util.List;
 
+import com.recharge.customer.entity.RechargePlan;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.recharge.customer.entity.RechargePlan;
+import java.util.List;
 
 
 @FeignClient(name="AdminService" ,url ="http://localhost:8006")

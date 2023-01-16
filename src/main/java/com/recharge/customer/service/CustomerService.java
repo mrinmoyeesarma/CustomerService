@@ -1,9 +1,9 @@
 package com.recharge.customer.service;
 
-import java.util.List;
-
 import com.recharge.customer.entity.RechargePlan;
 import com.recharge.customer.entity.Subscription;
+
+import java.util.List;
 
 public interface CustomerService {
 	List<RechargePlan> getAvailablePlans();
